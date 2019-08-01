@@ -127,10 +127,10 @@ public class ChooseAreaFragment extends Fragment {
     }
 
     private void queryCities() {
-        titleText.setText(seletedProvince.getProvinceName());
-        backButton.setVisibility(View.VISIBLE);
         cityList = DataSupport.where("provinceid = ?", String.valueOf(seletedProvince.getId())).find(City.class);
         if (cityList.size() > 0) {
+            titleText.setText(seletedProvince.getProvinceName());
+            backButton.setVisibility(View.VISIBLE);
             dataList.clear();
             for (City city : cityList) {
                 dataList.add(city.getCityName());
@@ -146,10 +146,10 @@ public class ChooseAreaFragment extends Fragment {
     }
 
     private void queryCounties() {
-        titleText.setText(seletedCity.getCityName());
-        backButton.setVisibility(View.VISIBLE);
         countyList = DataSupport.where("cityid = ?", String.valueOf(seletedCity.getId())).find(County.class);
         if (countyList.size() > 0) {
+            titleText.setText(seletedCity.getCityName());
+            backButton.setVisibility(View.VISIBLE);
             dataList.clear();
             for (County county : countyList) {
                 dataList.add(county.getCountyName());
