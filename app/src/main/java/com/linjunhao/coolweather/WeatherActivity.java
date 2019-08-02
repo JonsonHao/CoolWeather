@@ -1,5 +1,6 @@
 package com.linjunhao.coolweather;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.linjunhao.coolweather.gson.Forecast;
 import com.linjunhao.coolweather.gson.Weather;
+import com.linjunhao.coolweather.service.AutoUpdateService;
 import com.linjunhao.coolweather.util.HttpUtil;
 import com.linjunhao.coolweather.util.Utility;
 
@@ -158,7 +160,7 @@ public class WeatherActivity extends AppCompatActivity {
         });
     }
 
-    public void showWeatherInfo(Weather weather) {
+    private void showWeatherInfo(Weather weather) {
         String cityName = weather.basic.cityName;
         String updateTime = weather.basic.update.updateTime.split(" ")[1];
         String degree = weather.now.temperature + "°C";
@@ -191,6 +193,8 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 
     private void loadBingPic() {
